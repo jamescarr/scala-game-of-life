@@ -1,0 +1,3 @@
+#Tests
+#Mon Sep 27 21:24:55 CDT 2010
+src/test/scala/GameOfLifeSpec.scala=GameOfLifeSpecification<<org.specs.Specification

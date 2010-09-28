@@ -1,0 +1,4 @@
+#External Dependencies
+#Mon Sep 27 19:47:27 CDT 2010
+/home/jamescarr/projects/scala/gameoflife/project/boot/scala-2.7.7/lib/scala-library.jar=project.scala
+/home/jamescarr/projects/scala/gameoflife/project/boot/scala-2.7.7/org.scala-tools.sbt/sbt/0.7.4/sbt_2.7.7-0.7.4.jar=project.scala
