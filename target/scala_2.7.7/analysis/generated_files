@@ -1,3 +1,2 @@
 #Generated Classes
-#Mon Sep 27 21:24:54 CDT 2010
-src/main/scala/GameOfLife.scala=target/scala_2.7.7/classes/CellManager$$anonfun$getNeighborsFor$1.class\:target/scala_2.7.7/classes/CreateCells$$anonfun$apply$1.class\:target/scala_2.7.7/classes/GameOfLife$$anonfun$executeTurn$1.class\:target/scala_2.7.7/classes/GameOfLife.class\:target/scala_2.7.7/classes/CreateCells$.class\:target/scala_2.7.7/classes/CellManager$$anonfun$transform$1.class\:target/scala_2.7.7/classes/Cell.class\:target/scala_2.7.7/classes/CreateCells$$anonfun$apply$1$$anonfun$apply$2.class\:target/scala_2.7.7/classes/CreateCells.class\:target/scala_2.7.7/classes/CellManager$$anonfun$numberOfLiveNeighbors$1.class\:target/scala_2.7.7/classes/CellManager.class
+#Mon Sep 27 21:26:43 CDT 2010

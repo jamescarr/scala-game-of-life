@@ -1,9 +1,2 @@
 #External Dependencies
-#Mon Sep 27 21:24:55 CDT 2010
-/home/jamescarr/projects/scala/gameoflife/lib_managed/scala_2.7.7/compile/specs-1.6.2.1.jar=src/test/scala/GameOfLifeSpec.scala
-/home/jamescarr/projects/scala/gameoflife/target/scala_2.7.7/classes/Cell.class=src/test/scala/GameOfLifeSpec.scala
-/home/jamescarr/projects/scala/gameoflife/project/boot/scala-2.7.7/lib/scala-library.jar=src/test/scala/GameOfLifeSpec.scala
-/home/jamescarr/projects/scala/gameoflife/target/scala_2.7.7/classes/GameOfLife.class=src/test/scala/GameOfLifeSpec.scala
-/home/jamescarr/projects/scala/gameoflife/target/scala_2.7.7/classes/CellManager.class=src/test/scala/GameOfLifeSpec.scala
-/home/jamescarr/projects/scala/gameoflife/target/scala_2.7.7/classes/CreateCells$.class=src/test/scala/GameOfLifeSpec.scala
-/usr/lib/jvm/java-6-sun-1.6.0.20/jre/lib/rt.jar=src/test/scala/GameOfLifeSpec.scala
+#Mon Sep 27 21:26:43 CDT 2010

@@ -1,4 +1,2 @@
 #External Dependencies
-#Mon Sep 27 21:24:54 CDT 2010
-/home/jamescarr/projects/scala/gameoflife/project/boot/scala-2.7.7/lib/scala-library.jar=src/main/scala/GameOfLife.scala
-/usr/lib/jvm/java-6-sun-1.6.0.20/jre/lib/rt.jar=src/main/scala/GameOfLife.scala
+#Mon Sep 27 21:26:43 CDT 2010
