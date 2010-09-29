@@ -48,11 +48,13 @@ object App extends SimpleSwingApplication {
       board.coordinates.
         foreach(p => g draw buildRect(p, board))
 
-      //board.cells.keys.foreach(g fill buildRect(_, board))
+      board.cells.foreach(g fill buildRect(_, board))
     }
 
 
-    drawBoard(new Board((25, 25), (25, 25)))
+    drawBoard(new Board((25, 25), (25, 25), List(
+      (0,0),(2,1), (5,3)
+    )))
   }
 /*
     val timer = new SwingTimer(1000, new AbstractAction() {
@@ -69,14 +71,16 @@ object App extends SimpleSwingApplication {
 
 class Board(
   val size: Tuple2[Int, Int],
-  val pos: Tuple2[Int, Int]
+  val pos: Tuple2[Int, Int],
+  val cells: List[Tuple2[Int, Int]]
 ) {
-
+  def this(size: Tuple2[Int, Int],pos: Tuple2[Int, Int]) = {
+    this(size, pos, List.empty)
+  }
   def coordinates =
     for (y <- 0 until size._2; x <- 0 until size._1)
       yield(x, y)
 
   def clear() =
     new Board(size, pos)
-
 }
