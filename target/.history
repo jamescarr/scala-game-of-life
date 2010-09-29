@@ -1,5 +1,13 @@
-reload 
-update
-~test
+compile
 clean
-:q
+reload
+update
+compile
+run HelloWorld
+compile
+run HelloWorld
+run
+run Demo
+run
+run Main
+run

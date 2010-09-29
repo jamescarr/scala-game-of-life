@@ -1,0 +1,5 @@
+#External Dependencies
+#Tue Sep 28 19:13:21 CDT 2010
+/home/jamescarr/projects/scala/gameoflife/project/boot/scala-2.8.0/lib/scala-library.jar=src/main/scala/Demo.scala
+/usr/lib/jvm/java-6-sun-1.6.0.20/jre/lib/rt.jar=src/main/scala/Demo.scala
+/home/jamescarr/projects/scala/gameoflife/lib_managed/scala_2.8.0/compile/scala-swing-2.8.0.jar=src/main/scala/Demo.scala
