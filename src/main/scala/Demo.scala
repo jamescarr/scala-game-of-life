@@ -6,6 +6,7 @@ package GameOfLife
 
 import swing._
 import event._
+import scala.util.Random
 
 object App extends SimpleSwingApplication {
   import event.Key._
@@ -14,8 +15,8 @@ object App extends SimpleSwingApplication {
   import java.awt.event.{ActionEvent}
   import javax.swing.{Timer => SwingTimer, AbstractAction}
 
+  val random = new Random()
   override def top = frame
-
   val frame = new MainFrame {
     title = "Conway's Game of Life"
     contents = mainPanel
@@ -51,36 +52,44 @@ object App extends SimpleSwingApplication {
       board.cells.foreach(g fill buildRect(_, board))
     }
 
-
-    drawBoard(new Board((25, 25), (25, 25), List(
-      (0,0),(2,1), (5,3)
-    )))
+    drawBoard(board)
   }
-/*
+  var board = new Board((25, 25), (25, 25))
+  var counter = 0
     val timer = new SwingTimer(1000, new AbstractAction() {
       override def actionPerformed(e: ActionEvent) {
-        if (game.mode == ActiveMode) {
-          game = game.tick
-          repaint()
-        }
+        //board += ((counter, counter))   
+        //counter+=1
+        board = board.randomFill(random.nextInt(25))
+        repaint()
       }
     })
-*/
+  timer.start
   } // def top new MainFrame
 } // object App
 
 class Board(
   val size: Tuple2[Int, Int],
   val pos: Tuple2[Int, Int],
-  val cells: List[Tuple2[Int, Int]]
+  val cells: Set[Tuple2[Int, Int]]
 ) {
   def this(size: Tuple2[Int, Int],pos: Tuple2[Int, Int]) = {
-    this(size, pos, List.empty)
+    this(size, pos, Set.empty)
   }
   def coordinates =
     for (y <- 0 until size._2; x <- 0 until size._1)
       yield(x, y)
+  
+  def +(cell:Tuple2[Int,Int]) = new Board(size, pos, cells+cell)
 
+  def randomFill(n:Int) = {
+    val random = new Random
+    var cells:Set[Tuple2[Int,Int]] = Set.empty
+    for(x <- 0 until n)
+      cells += ((random.nextInt(size._1), random.nextInt(size._2)))
+    new Board(size, pos, cells)
+  }
   def clear() =
     new Board(size, pos)
 }
+
