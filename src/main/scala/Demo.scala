@@ -15,19 +15,27 @@ object App extends SimpleSwingApplication {
   import java.awt.event.{ActionEvent}
   import javax.swing.{Timer => SwingTimer, AbstractAction}
 
+  val BOARD_SIZE = (25,25)  
   val random = new Random()
+  
+  var game = new Game(BOARD_SIZE._1, BOARD_SIZE._2, Set.empty)
+  
   override def top = frame
   val frame = new MainFrame {
     title = "Conway's Game of Life"
     contents = new FlowPanel{
       background = AWTColor.white
       preferredSize = new Dimension(600, 700)
-      contents.append(mainPanel, randomize)
-      listenTo(randomize)
+      val randomize = new Button("Randomize")
+      val start = new Button("Start")
+      val stop = new Button("Stop")
+      
+      contents.append(mainPanel, randomize, start, stop)
+      listenTo(randomize, start, stop)
       reactions += {
-        case ButtonClicked(randomize) => {
-          randomFill
-        }
+        case ButtonClicked(`randomize`) => randomFill
+        case ButtonClicked(`start`) => timer.start
+        case ButtonClicked(`stop`) => timer.stop
       }
     }
     lazy val mainPanel = new Panel() {
@@ -41,15 +49,12 @@ object App extends SimpleSwingApplication {
         onPaint(g)
       }
     } // new Panel()
-  object randomize extends Button {       
-      text = "Random Population"     
-   }     
   def onPaint(g: Graphics2D) {
     val CELL_SIZE: Int = 20
     val CELL_MARGIN: Int = 1
     val darkRed = new AWTColor(200, 100, 100)
 
-    def buildRect(p: Tuple2[Int, Int], board: Board): Rectangle =
+    def buildRect(p: (Int,Int), board: Board): Rectangle =
       new Rectangle(p._1 * (CELL_SIZE + CELL_MARGIN) + board.pos._1,
         (board.size._2 - p._2 - 1) * (CELL_SIZE + CELL_MARGIN) + board.pos._2,
         CELL_SIZE,
@@ -67,14 +72,15 @@ object App extends SimpleSwingApplication {
     drawBoard(board)
   }
   def randomFill {
-    board = board.randomFill(random.nextInt(25))
+    board = board.randomFill(BOARD_SIZE._1*4)
+    game = new Game(BOARD_SIZE._1, BOARD_SIZE._2, board.cells)
     repaint()
   }
-
-  var board = new Board((25, 25), (25, 25))
-  val timer = new SwingTimer(1000, new AbstractAction() {
+  var board = new Board(BOARD_SIZE, BOARD_SIZE)
+  val timer = new SwingTimer(100, new AbstractAction() {
       override def actionPerformed(e: ActionEvent) {
-        board = board.randomFill(random.nextInt(25))
+        game.tick
+        board = new Board(BOARD_SIZE, BOARD_SIZE, game.getLivingCells)
         repaint()
       }
     })
@@ -82,11 +88,11 @@ object App extends SimpleSwingApplication {
 } // object App
 
 class Board(
-  val size: Tuple2[Int, Int],
-  val pos: Tuple2[Int, Int],
-  val cells: Set[Tuple2[Int, Int]]
+  val size: (Int,Int),
+  val pos: (Int,Int),
+  val cells: Set[(Int,Int)]
 ) {
-  def this(size: Tuple2[Int, Int],pos: Tuple2[Int, Int]) = {
+  def this(size: (Int,Int),pos: (Int,Int)) = {
     this(size, pos, Set.empty)
   }
   def coordinates =
