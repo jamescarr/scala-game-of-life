@@ -19,7 +19,17 @@ object App extends SimpleSwingApplication {
   override def top = frame
   val frame = new MainFrame {
     title = "Conway's Game of Life"
-    contents = mainPanel
+    contents = new FlowPanel{
+      background = AWTColor.white
+      preferredSize = new Dimension(600, 700)
+      contents.append(mainPanel, randomize)
+      listenTo(randomize)
+      reactions += {
+        case ButtonClicked(randomize) => {
+          randomFill
+        }
+      }
+    }
     lazy val mainPanel = new Panel() {
       focusable = true
       background = AWTColor.white
@@ -31,7 +41,9 @@ object App extends SimpleSwingApplication {
         onPaint(g)
       }
     } // new Panel()
-
+  object randomize extends Button {       
+      text = "Random Population"     
+   }     
   def onPaint(g: Graphics2D) {
     val CELL_SIZE: Int = 20
     val CELL_MARGIN: Int = 1
@@ -54,17 +66,18 @@ object App extends SimpleSwingApplication {
 
     drawBoard(board)
   }
+  def randomFill {
+    board = board.randomFill(random.nextInt(25))
+    repaint()
+  }
+
   var board = new Board((25, 25), (25, 25))
-  var counter = 0
-    val timer = new SwingTimer(1000, new AbstractAction() {
+  val timer = new SwingTimer(1000, new AbstractAction() {
       override def actionPerformed(e: ActionEvent) {
-        //board += ((counter, counter))   
-        //counter+=1
         board = board.randomFill(random.nextInt(25))
         repaint()
       }
     })
-  timer.start
   } // def top new MainFrame
 } // object App
 
