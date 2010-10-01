@@ -15,17 +15,17 @@ object App extends SimpleSwingApplication {
   import java.awt.event.{ActionEvent}
   import javax.swing.{Timer => SwingTimer, AbstractAction}
 
-  val BOARD_SIZE = (25,25)  
+  val BOARD_SIZE = (50,25)  
   val random = new Random()
   
-  var game = new Game(BOARD_SIZE._1, BOARD_SIZE._2, Set.empty)
+  var game = new Game(BOARD_SIZE._2, BOARD_SIZE._1, Set.empty)
   
   override def top = frame
   val frame = new MainFrame {
     title = "Conway's Game of Life"
     contents = new FlowPanel{
       background = AWTColor.white
-      preferredSize = new Dimension(600, 700)
+      preferredSize = new Dimension(1200, 700)
       val randomize = new Button("Randomize")
       val start = new Button("Start")
       val stop = new Button("Stop")
@@ -41,7 +41,7 @@ object App extends SimpleSwingApplication {
     lazy val mainPanel = new Panel() {
       focusable = true
       background = AWTColor.white
-      preferredSize = new Dimension(600, 600)
+      preferredSize = new Dimension(1200, 600)
 
       override def paint(g: Graphics2D) {
         g.setColor(AWTColor.white)
@@ -72,8 +72,8 @@ object App extends SimpleSwingApplication {
     drawBoard(board)
   }
   def randomFill {
-    board = board.randomFill(BOARD_SIZE._1*4)
-    game = new Game(BOARD_SIZE._1, BOARD_SIZE._2, board.cells)
+    board = board.randomFill(BOARD_SIZE._1*5)
+    game = new Game(BOARD_SIZE._2, BOARD_SIZE._1, board.cells)
     repaint()
   }
   var board = new Board(BOARD_SIZE, BOARD_SIZE)
